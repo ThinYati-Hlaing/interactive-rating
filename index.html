@@ -3,26 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
-
-    <title>Frontend Mentor | Interactive rating component</title>
-
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <title>Interactive rating component</title>
     <style>
-      body{
+      body {
         color: white;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        margin: 0;
       }
       .attribution {
         font-size: 11px;
@@ -38,8 +32,6 @@
         justify-content: center;
         background-color: hsl(213, 19%, 18%);
         border-radius: 30px;
-        width: 400px;
-        height: 400px;
         padding: 3rem;
       }
       .title {
@@ -75,6 +67,9 @@
         border-radius: 50%;
         cursor: pointer;
       }
+      .rate.active {
+        background-color: orange;
+      }
       .thank {
         display: none;
         flex-direction: column;
@@ -107,7 +102,7 @@
         margin: auto;
         border-radius: 15px;
       }
-      .star{
+      .star {
         width: 20px;
         margin: 0px;
         padding: 10px;
@@ -120,24 +115,19 @@
     <!-- Rating state start -->
 
     <div class="main">
-      <!-- <div  class="star"> -->
-      <!-- <img class="star" src="./images/icon-star.svg" alt="" /> -->
-      <!-- </div> -->
       <div id="subrate" class="rates">
-        <!-- <div> -->
-          <img class="star" src="./images/icon-star.svg" alt="" />
-        <!-- </div> -->
+        <img class="star" src="./images/icon-star.svg" alt="" />
         <h1 class="title">How did we do?</h1>
         <p class="rating-text">
           Please let us know how we did with your support request. All feedback
           is appreciated to help us improve our offering!
         </p>
-        <div class="rating">
-          <div onclick="getRating()" class="rate">1</div>
-          <div onclick="getRating()" class="rate">2</div>
-          <div onclick="getRating()" class="rate">3</div>
-          <div onclick="getRating()" class="rate">4</div>
-          <div onclick="getRating()" class="rate">5</div>
+        <div onclick="getRating()" class="rating">
+          <div class="rate">1</div>
+          <div class="rate">2</div>
+          <div class="rate">3</div>
+          <div class="rate">4</div>
+          <div class="rate">5</div>
         </div>
         <button type="button" id="myButton" class="btn">Submit</button>
       </div>
@@ -153,17 +143,6 @@
       </div>
     </div>
 
-    <!-- Rating state end -->
-
-    <!-- Thank you state start -->
-
-    <!-- You selected -->
-    <!-- Add rating here -->
-    <!-- out of 5 Thank you! We appreciate you taking the time to give a rating. If
-    you ever need more support, don’t hesitate to get in touch! -->
-
-    <!-- Thank you state end -->
-
     <!-- <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
@@ -175,18 +154,23 @@
       const btn = document.getElementById("myButton");
 
       let rating;
+
       function getRating() {
-        const rate = document.querySelectorAll(".rate");
         rate.forEach((item) => {
           item.addEventListener("click", () => {
-            item.style.backgroundColor = "orange";
+            console.log("clicked", item.textContent);
             rating = item.textContent;
+            rate.forEach((items) => {
+              items.classList.remove("active");
+            });
+            item.classList.add("active");
+            btn.style.backgroundColor = "white";
           });
         });
       }
+      getRating();
 
       btn.addEventListener("click", () => {
-        getRating();
         document.getElementById("thankYou").style.display = "flex";
         document.querySelector(
           "p#feedback"

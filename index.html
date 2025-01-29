@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Interactive rating component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      body{
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: hsl(213, 19%, 18%);
+        border-radius: 30px;
+        width: 400px;
+        height: 400px;
+        padding: 3rem;
+      }
+      .title {
+        justify-content: start;
+        align-items: start;
+      }
+      .btn {
+        width: 270px;
+        align-self: center;
+        background-color: hsl(25, 97%, 53%);
+        color: black;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+      }
+      .rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem;
+      }
+      .rates {
+        display: flex;
+        flex-direction: column;
+      }
+      .rate {
+        align-items: center;
+        background-color: grey;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .thank {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+      }
+      .title {
+        text-align: start;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+      }
+      .title2 {
+        text-align: center;
+      }
+      img {
+        margin: 2rem;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      .rating-text {
+        width: 300px;
+        text-align: center;
+      }
+      .feedback {
+        background-color: hsl(217, 12%, 63%);
+        width: 150px;
+        padding: 0.5rem;
+        color: hsl(25, 97%, 53%);
+        padding: 10px 20px;
+        margin: auto;
+        border-radius: 15px;
+      }
+      .star{
+        width: 20px;
+        margin: 0px;
+        padding: 10px;
+        background-color: hsl(217, 12%, 63%);
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Rating state start -->
+
+    <div class="main">
+      <!-- <div  class="star"> -->
+      <!-- <img class="star" src="./images/icon-star.svg" alt="" /> -->
+      <!-- </div> -->
+      <div id="subrate" class="rates">
+        <!-- <div> -->
+          <img class="star" src="./images/icon-star.svg" alt="" />
+        <!-- </div> -->
+        <h1 class="title">How did we do?</h1>
+        <p class="rating-text">
+          Please let us know how we did with your support request. All feedback
+          is appreciated to help us improve our offering!
+        </p>
+        <div class="rating">
+          <div onclick="getRating()" class="rate">1</div>
+          <div onclick="getRating()" class="rate">2</div>
+          <div onclick="getRating()" class="rate">3</div>
+          <div onclick="getRating()" class="rate">4</div>
+          <div onclick="getRating()" class="rate">5</div>
+        </div>
+        <button type="button" id="myButton" class="btn">Submit</button>
+      </div>
+
+      <div id="thankYou" class="thank">
+        <img class="img" src="./images/illustration-thank-you.svg" alt="" />
+        <p id="feedback" class="feedback"></p>
+        <h1 class="title2">Thank you!</h1>
+        <p class="rating-text">
+          We appreciate you taking the time to give a rating. If you ever need
+          more support, don’t hesitate to get in touch!
+        </p>
+      </div>
+    </div>
+
+    <!-- Rating state end -->
+
+    <!-- Thank you state start -->
+
+    <!-- You selected -->
+    <!-- Add rating here -->
+    <!-- out of 5 Thank you! We appreciate you taking the time to give a rating. If
+    you ever need more support, don’t hesitate to get in touch! -->
+
+    <!-- Thank you state end -->
+
+    <!-- <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div> -->
+    <script>
+      const rate = document.querySelectorAll(".rate");
+      const btn = document.getElementById("myButton");
+
+      let rating;
+      function getRating() {
+        const rate = document.querySelectorAll(".rate");
+        rate.forEach((item) => {
+          item.addEventListener("click", () => {
+            item.style.backgroundColor = "orange";
+            rating = item.textContent;
+          });
+        });
+      }
+
+      btn.addEventListener("click", () => {
+        getRating();
+        document.getElementById("thankYou").style.display = "flex";
+        document.querySelector(
+          "p#feedback"
+        ).innerHTML = `You selected ${rating} out of 5`;
+        document.getElementById("subrate").style.display = "none";
+      });
+    </script>
+  </body>
+</html>

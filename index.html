@@ -9,10 +9,18 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Overpass:ital,wght@0,100..900;1,100..900&family=Padauk:wght@400;700&family=Questrial&display=swap"
+      rel="stylesheet"
+    />
     <title>Interactive rating component</title>
     <style>
       body {
-        color: white;
+        font-family: Overpass, sans-serif;
+        color: hsl(0, 0%, 100%);
+        background-color: hsl(216, 12%, 8%);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -30,6 +38,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        width: 300px;
+        height: 350px;
         background-color: hsl(213, 19%, 18%);
         border-radius: 30px;
         padding: 3rem;
@@ -60,11 +70,16 @@
         flex-direction: column;
       }
       .rate {
+        display: flex;
         align-items: center;
+        justify-content: center;
         background-color: grey;
         color: white;
-        padding: 0.5rem 1rem;
+        width: 25px;
+        height: 25px;
         border-radius: 50%;
+        padding: 0.5rem;
+        /* border-radius: 50%; */
         cursor: pointer;
       }
       .rate.active {
@@ -77,11 +92,13 @@
       }
       .title {
         text-align: start;
+        font-weight: 700;
         margin-top: 1rem;
         margin-bottom: 2rem;
       }
       .title2 {
         text-align: center;
+        font-weight: 700;
       }
       img {
         margin: 2rem;
@@ -92,6 +109,7 @@
       .rating-text {
         width: 300px;
         text-align: center;
+        font-size: 15px;
       }
       .feedback {
         background-color: hsl(217, 12%, 63%);
@@ -155,21 +173,17 @@
 
       let rating;
 
-      function getRating() {
-        rate.forEach((item) => {
-          item.addEventListener("click", () => {
-            console.log("clicked", item.textContent);
-            rating = item.textContent;
-            rate.forEach((items) => {
-              items.classList.remove("active");
-            });
-            item.classList.add("active");
-            btn.style.backgroundColor = "white";
+      rate.forEach((item) => {
+        item.addEventListener("click", () => {
+          console.log("clicked", item.textContent);
+          rating = item.textContent;
+          rate.forEach((items) => {
+            items.classList.remove("active");
           });
+          item.classList.add("active");
+          btn.style.backgroundColor = "white";
         });
-      }
-      getRating();
-
+      });
       btn.addEventListener("click", () => {
         document.getElementById("thankYou").style.display = "flex";
         document.querySelector(
